@@ -22,11 +22,26 @@ def best_blast_hit (tabular, bitcol=11):
             best[label] = spl
     return best
 
+default_outfmt_idx = {
+    "name": 0,
+    "hit": 1,
+    "tid": 12,
+    "evalue": 10,
+    "bitscore": 11,
+}
+
+SCGidv1_outfmt_idx = {
+    "name": 0,
+    "hit": 1,
+    "tid": 9,
+    "evalue": 7,
+    "bitscore": 8,
+}
 if sys.argv[1] in ['-h','--help']:
     print '''
 ncbi_taxrpt.py
-USAGE: python ncbi_taxrpt.py [blast_output]\n
-    REQUIREMENT IN ORIGINAL BLAST CALL:
+USAGE: python ncbi_taxrpt.py [blast_output] [[outfmt (optional: default|scgidv1)]]\n
+    REQUIREMENT IN ORIGINAL BLAST CALL (default):
     \t-outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore staxids"
     '''
     sys.exit(0)
@@ -35,11 +50,22 @@ ids = OrderedDict()
 rank_of_int = ('superkingdom','kingdom','phylum','class','order','family','genus','species')
 #print '\t'.join(['query','hit','evalue'])+'\t'+'\t'.join(rank_of_int)
 
-for key,best in best_blast_hit(sys.argv[1], bitcol=7).iteritems():
-    name = best[0]
-    hit = best[1]
-    tid = best[8]
-    evalue = best[6]
+# Add compatibility for different outfmt - especially the one in SCGid version 1
+indices = default_outfmt_idx
+if len(sys.argv) == 3:
+    if sys.argv[2] == "default":
+        pass
+    elif sys.argv[2] == "scgidv1":
+        indices = SCGidv1_outfmt_idx
+    else:
+        print "Bad mode argument, {}. Options are `default` or `scgidv1`".format(sys.argv[2])
+        sys.exit(1)
+
+for key,best in best_blast_hit(sys.argv[1], bitcol = indices["bitscore"] ).iteritems():
+    name = best[ indices["name"] ]
+    hit = best[ indices["hit"] ]
+    tid = best[ indicies["tid"] ]
+    evalue = best[ indices["evalue"} ]
     if name not in ids.keys():
         ids[name] = {'hit': '',
                     'lineage': None
