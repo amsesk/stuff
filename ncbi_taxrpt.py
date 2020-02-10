@@ -65,7 +65,7 @@ for key,best in best_blast_hit(sys.argv[1], bitcol = indices["bitscore"] ).iteri
     name = best[ indices["name"] ]
     hit = best[ indices["hit"] ]
     tid = best[ indicies["tid"] ]
-    evalue = best[ indices["evalue"} ]
+    evalue = best[ indices["evalue"] ]
     if name not in ids.keys():
         ids[name] = {'hit': '',
                     'lineage': None
