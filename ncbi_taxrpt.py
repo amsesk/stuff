@@ -25,18 +25,19 @@ def best_blast_hit (tabular, bitcol=11):
 default_outfmt_idx = {
     "name": 0,
     "hit": 1,
-    "tid": 12,
     "evalue": 10,
     "bitscore": 11,
+    "tid": 12,
 }
 
 SCGidv1_outfmt_idx = {
     "name": 0,
     "hit": 1,
-    "tid": 9,
     "evalue": 7,
     "bitscore": 8,
+    "tid": 9,
 }
+6 qseqid sseqid pident qlen length mismatch gapopen evalue bitscore staxids
 if sys.argv[1] in ['-h','--help']:
     print '''
 ncbi_taxrpt.py
