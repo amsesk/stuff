@@ -37,7 +37,7 @@ SCGidv1_outfmt_idx = {
     "bitscore": 8,
     "tid": 9,
 }
-6 qseqid sseqid pident qlen length mismatch gapopen evalue bitscore staxids
+
 if sys.argv[1] in ['-h','--help']:
     print '''
 ncbi_taxrpt.py
