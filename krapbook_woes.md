@@ -13,18 +13,16 @@ Getting Apple Airbuds to Work
 # Install packages from official repositiries
 Pacman 
 
-CIFS to mycology server
+### CIFS to mycology server
 ```
 alias mycology="sudo mount -t cifs -o username=amsesk,domain=UMROOT,vers=1.0 //lsa-research01.m.storage.umich.edu/lsa-research01/tyjames/mycology /mnt/mycology/"
 ```
 
-Set network interface to unmanaged by NetworkManager
+### Set network interface to unmanaged by NetworkManager
 In file: /etc/udev/rules.d/o-nta1000-net.rules
 ```
 ACTION=="add", SUBSYSTEM=="net", KERNEL=="wlan0", ENV{NM_UNMANAGED}="1"
 ```
-
-Connection config for UMVPN
 
 Set wireless interface to unmanaged by NetworkManager via udev
 I think that I figured out a solution to this problem, so I figured I'd post it just in case others having the same problem find their way to this thread. I wasn't able to completely remove the duplicated interface, but I was able to set its state with NetworkManager to unmanaged. I haven't had a similar kernel panic or crash since doing that, so I am assuming it is a viable work around, at least for now. I achieved this through creating a file at
@@ -35,16 +33,19 @@ After rebooting, you can run
 nmcli dev
 as root to verify that the interface has been set the "unmanaged" for NetworkManager.
 
-Auto-mount removable media (microSD card in this case) via udev
+### Connection config for UMVPN
 
-Dontkillssh.service (global service)
+### Auto-mount removable media (microSD card in this case) via udev
 
-Globus-endpoint.service (user service)
+### Dontkillssh.service (global service)
+
+### Globus-endpoint.service (user service)
 ```
 
 ```
 
-Setting up conky
+###Setting up conky
+
 ```
 Sudo apt install conky
 Sudo apt install lm-sensors
