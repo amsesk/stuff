@@ -36,6 +36,10 @@ as root to verify that the interface has been set the "unmanaged" for NetworkMan
 ### Connection config for UMVPN
 
 ### Auto-mount removable media (microSD card in this case) via udev
+In file `/etc/udev/rules.d/mount_sd.rules`
+```
+ACTION=="add", SUBSYSTEM=="block", ENV{ID_FS_USAGE}=="filesystem", RUN{program}+="/usr/bin/systemd-mount --no-block --automount=yes --collect /dev/mmcblk1p1 /media/MSD1"
+``` 
 
 ### Dontkillssh.service (global service)
 
